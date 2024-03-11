@@ -4,6 +4,7 @@ from email.message import EmailMessage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
+import base64
 
 import myPassword
 import time
@@ -57,22 +58,49 @@ print("다이얼 이미지를 성공적으로 캡처하여", screenshot_path, "�
 # msg = EmailMessage()
 # image 추가용 code
 msg = MIMEMultipart()
+msg['From'] = 'kakaokokoa9971@gmail.com'
+# msg['To'] = 'jaeseokk@ajou.ac.kr'
+msg['To'] = 'june1012june@gmail.com,kakaokokoa9971@gmail.com'
+
 
 msg['Subject'] = "Today's FGI is "+str(fear_and_greed_index)+"."
 
-# msg.set_content("Nice 2 meet U :)")
-# image 추가용 code
-text = MIMEText("Please refer to the attached image.:)")
-msg.attach(text)
+# text = MIMEText("Please refer to the attached image.:)")
+# msg.attach(text)
+#
+# with open("FeadAndGreed.png", "rb") as attachment:
+#     image_part = MIMEImage(attachment.read(), name="FeadAndGreed.png")
+#     msg.attach(image_part)
+#
+# smtp_gmail.send_message(msg)
+#
+# smtp_gmail.quit()
 
-msg['From'] = 'kakaokokoa9971@gmail.com'
-# msg['To'] = 'jaeseokk@ajou.ac.kr'
-msg['To'] = 'june1012june@gmail.com'
+# HTML 형식의 본문 생성
+html_body = f"""
+<html>
+  <body>
+    <p>Today's Fear and Greed Index: {fear_and_greed_index}</p>
+    <img src="cid:image1" width="331" height="184">
+  </body>
+</html>
+"""
 
-with open("FeadAndGreed.png", "rb") as attachment:
-    image_part = MIMEImage(attachment.read(), name="FeadAndGreed.png")
-    msg.attach(image_part)
+# MIMEText 객체 생성 후 HTML 본문 추가
+html_part = MIMEText(html_body, 'html')
+msg.attach(html_part)
 
+# 이미지를 base64로 인코딩하여 본문에 첨부
+with open(screenshot_path, 'rb') as img_file:
+    img_data = img_file.read()
+    img_base64 = base64.b64encode(img_data).decode('utf-8')
+
+msg_image = MIMEImage(img_data)
+msg_image.add_header('Content-ID', '<image1>')
+msg.attach(msg_image)
+
+# 이메일 보내기
 smtp_gmail.send_message(msg)
 
+# 종료
 smtp_gmail.quit()
