@@ -60,7 +60,7 @@ print("다이얼 이미지를 성공적으로 캡처하여", screenshot_path, "�
 msg = MIMEMultipart()
 msg['From'] = 'kakaokokoa9971@gmail.com'
 # msg['To'] = 'jaeseokk@ajou.ac.kr'
-msg['To'] = 'june1012june@gmail.com,kakaokokoa9971@gmail.com'
+msg['To'] = 'june1012june@gmail.com,kakaokokoa9971@gmail.com,dw12.jeong@g.skku.edu'
 
 
 msg['Subject'] = "Today's FGI is "+str(fear_and_greed_index)+"."
