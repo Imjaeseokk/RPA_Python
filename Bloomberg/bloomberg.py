@@ -21,7 +21,7 @@ import base64
 
 
 import myPassword
-openai.api_key = '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'
+openai.api_key = ''
 
 smtp_gmail = smtplib.SMTP('smtp.gmail.com',587)
 
