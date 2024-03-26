@@ -6,7 +6,7 @@ from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 import base64
 
-import myPassword
+# import myPassword
 import time
 
 
