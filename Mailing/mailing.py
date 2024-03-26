@@ -46,7 +46,7 @@ url = "https://edition.cnn.com/markets/fear-and-greed"
 driver.get(url)
 
 # 페이지가 완전히 로드될 때까지 잠시 대기
-time.sleep(10)  # 필요에 따라 대기 시간 조절 가능
+time.sleep(60)  # 필요에 따라 대기 시간 조절 가능
 # Fear & Greed Index 다이얼 이미지 요소 찾기
 # wait = WebDriverWait(driver, 10)
 # dial_element = driver.find_element(By.CLASS_NAME, 'market-fng-gauge__meter')
