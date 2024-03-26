@@ -23,9 +23,9 @@ jobs:
       
       - name: access to secrets
         run: |
-          echo "myAPPPW=$myAPPPW" >> .env
+          echo "MYAPPPW=$MYAPPPW" >> .env
         env:
-          myAPPPW: ${{secrets.myAPPPW}}
+          myAPPPW: ${{secrets.MYAPPPW}}
 
       - name: Install Python dependencies
         run: |
