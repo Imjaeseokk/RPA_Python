@@ -37,7 +37,7 @@ smtp_gmail = smtplib.SMTP_SSL('smtp.gmail.com', 465)
 # smtp_gmail.starttls()
 
 # 로그인
-app_password = os.environ.get('myAPPPW')
+app_password = os.environ.get('MYAPPPW')
 smtp_gmail.login('kakaokokoa9971@gmail.com',app_password)
 
 ## fear and greed 가져오기
