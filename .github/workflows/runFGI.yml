@@ -20,6 +20,12 @@ jobs:
 
       - name: Install system dependencies
         run: sudo apt-get update && sudo apt-get install -y build-essential libffi-dev
+      
+      - name: access to secrets
+        run: |
+          echo "myAPPPW=$myAPPPW" >> .env
+        env:
+          myAPPPW: ${{secrets.myAPPPW}}
 
       - name: Install Python dependencies
         run: |
