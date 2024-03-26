@@ -27,7 +27,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Python script
-        run: python crawler.py # 이곳에 실제 파이썬 파일명을 적어주세요.
+        run: python mailing.py # 이곳에 실제 파이썬 파일명을 적어주세요.
 
       - name: Commit and push changes
         if: steps.changed-files.outputs.files_changed == 'true'
