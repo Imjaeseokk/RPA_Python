@@ -32,7 +32,8 @@ smtp_gmail.ehlo()
 smtp_gmail.starttls()
 
 # 로그인
-smtp_gmail.login('kakaokokoa9971@gmail.com',myPassword.getPW())
+app_password = os.environ.get('myAPPPW')
+smtp_gmail.login('kakaokokoa9971@gmail.com',app_password)
 
 ## fear and greed 가져오기
 url = "https://edition.cnn.com/markets/fear-and-greed"
