@@ -27,7 +27,8 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 
 # Simple Mail Transfer Protocol
 # 사용하는 email 계정의 smtp 서버 도메인 이름 입력
-smtp_gmail = smtplib.SMTP('smtp.gmail.com',587)
+# smtp_gmail = smtplib.SMTP('smtp.gmail.com',587)
+smtp_gmail = smtplib.SMTP_SSL('smtp.gmail.com', 465)
 
 # 서버 연결 설정
 smtp_gmail.ehlo()
