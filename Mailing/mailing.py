@@ -50,7 +50,7 @@ time.sleep(60)  # 필요에 따라 대기 시간 조절 가능
 # Fear & Greed Index 다이얼 이미지 요소 찾기
 # wait = WebDriverWait(driver, 10)
 # dial_element = driver.find_element(By.CLASS_NAME, 'market-fng-gauge__meter')
-dial_element = driver.find_element(By.XPATH, '/html/body/div[1]/section[4]/section[1]/section[1]/div/section/div[1]/div[2]')
+# dial_element = driver.find_element(By.XPATH, '/html/body/div[1]/section[4]/section[1]/section[1]/div/section/div[1]/div[2]')
 value_element = driver.find_element(By.XPATH, '/html/body/div[1]/section[4]/section[1]/section[1]/div/section/div[1]/div[2]/div[1]/div/div[1]/div[1]/div/div[4]/span')
 
 fear_and_greed_index = value_element.text
@@ -58,9 +58,9 @@ fear_and_greed_index = value_element.text
 print(fear_and_greed_index)
 
 # 다이얼 이미지 스크린샷 캡처
-screenshot_path = "FeadAndGreed.png"
-dial_element.screenshot(screenshot_path)
-print("다이얼 이미지를 성공적으로 캡처하여", screenshot_path, "에 저장했습니다.")
+# screenshot_path = "FeadAndGreed.png"
+# dial_element.screenshot(screenshot_path)
+# print("다이얼 이미지를 성공적으로 캡처하여", screenshot_path, "에 저장했습니다.")
 
 # msg = EmailMessage()
 # image 추가용 code
@@ -98,13 +98,13 @@ html_part = MIMEText(html_body, 'html')
 msg.attach(html_part)
 
 # 이미지를 base64로 인코딩하여 본문에 첨부
-with open(screenshot_path, 'rb') as img_file:
-    img_data = img_file.read()
-    img_base64 = base64.b64encode(img_data).decode('utf-8')
+# with open(screenshot_path, 'rb') as img_file:
+#     img_data = img_file.read()
+#     img_base64 = base64.b64encode(img_data).decode('utf-8')
 
-msg_image = MIMEImage(img_data)
-msg_image.add_header('Content-ID', '<image1>')
-msg.attach(msg_image)
+# msg_image = MIMEImage(img_data)
+# msg_image.add_header('Content-ID', '<image1>')
+# msg.attach(msg_image)
 
 # 이메일 보내기
 smtp_gmail.send_message(msg)
