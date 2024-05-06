@@ -69,6 +69,7 @@ all_elements = driver.find_elements(By.XPATH, '//*')
 
 # 각 요소의 class name과 HTML value를 출력
 for element in all_elements:
+    print(element)
     class_name = element.get_attribute('class')
     html_value = element.get_attribute('innerHTML').strip()
     if html_value == "40":
