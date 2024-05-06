@@ -44,6 +44,7 @@ smtp_gmail.login('kakaokokoa9971@gmail.com',app_password)
 ## fear and greed 가져오기
 url = "https://edition.cnn.com/markets/fear-and-greed"
 driver.get(url)
+driver.maximize_window()
 
 # 페이지가 완전히 로드될 때까지 잠시 대기
 # time.sleep(15)  # 필요에 따라 대기 시간 조절 가능
@@ -59,75 +60,72 @@ while driver.execute_script("return document.readyState;") != "complete":
     time.sleep(1)
 print("loading complete")
 
-# 값이 40인 모든 요소를 찾고 클래스 이름 출력
-all_elements = driver.find_elements(By.XPATH, '//*')
-if all_elements:
-    print(all_elements)
-# 각 요소의 class name과 HTML value를 출력
-for element in all_elements:
-    print(element)
-    class_name = element.get_attribute('class')
-    html_value = element.get_attribute('innerHTML').strip()
-    if html_value == "40":
-        print(f"Class: {class_name}, Value: {html_value}")
-### end
 
-value_element = driver.find_element(By.CLASS_NAME, 'market-fng-gauge__dial-number-value')
-fear_and_greed_index = value_element.text
+try:
+    # value_element = driver.find_element(By.CLASS_NAME, 'market-fng-gauge__dial-number-value')
+    value_element = driver.find_element_by_class_name('market-fng-gauge__dial-number-value')
 
-print(fear_and_greed_index)
+    fear_and_greed_index = value_element.text
 
-# 다이얼 이미지 스크린샷 캡처
-# screenshot_path = "FeadAndGreed.png"
-# dial_element.screenshot(screenshot_path)
-# print("다이얼 이미지를 성공적으로 캡처하여", screenshot_path, "에 저장했습니다.")
+    print(fear_and_greed_index)
 
-# msg = EmailMessage()
-# image 추가용 code
-msg = MIMEMultipart()
-msg['From'] = 'kakaokokoa9971@gmail.com'
-msg['To'] = 'jaeseokk@ajou.ac.kr'
-# msg['To'] = 'june1012june@gmail.com,kakaokokoa9971@gmail.com,dw12.jeong@g.skku.edu'
+    # 다이얼 이미지 스크린샷 캡처
+    # screenshot_path = "FeadAndGreed.png"
+    # dial_element.screenshot(screenshot_path)
+    # print("다이얼 이미지를 성공적으로 캡처하여", screenshot_path, "에 저장했습니다.")
+
+    # msg = EmailMessage()
+    # image 추가용 code
+    msg = MIMEMultipart()
+    msg['From'] = 'kakaokokoa9971@gmail.com'
+    msg['To'] = 'jaeseokk@ajou.ac.kr'
+    # msg['To'] = 'june1012june@gmail.com,kakaokokoa9971@gmail.com,dw12.jeong@g.skku.edu'
 
 
-msg['Subject'] = "Today's FGI is "+str(fear_and_greed_index)+"."
+    msg['Subject'] = "Today's FGI is "+str(fear_and_greed_index)+"."
 
-# text = MIMEText("Please refer to the attached image.:)")
-# msg.attach(text)
-#
-# with open("FeadAndGreed.png", "rb") as attachment:
-#     image_part = MIMEImage(attachment.read(), name="FeadAndGreed.png")
-#     msg.attach(image_part)
-#
-# smtp_gmail.send_message(msg)
-#
-# smtp_gmail.quit()
+    # text = MIMEText("Please refer to the attached image.:)")
+    # msg.attach(text)
+    #
+    # with open("FeadAndGreed.png", "rb") as attachment:
+    #     image_part = MIMEImage(attachment.read(), name="FeadAndGreed.png")
+    #     msg.attach(image_part)
+    #
+    # smtp_gmail.send_message(msg)
+    #
+    # smtp_gmail.quit()
 
-# HTML 형식의 본문 생성
-html_body = f"""
-<html>
-  <body>
-    <p>Today's Fear and Greed Index: {fear_and_greed_index}</p>
-    <img src="cid:image1" width="331" height="184">
-  </body>
-</html>
-"""
+    # HTML 형식의 본문 생성
+    html_body = f"""
+    <html>
+      <body>
+        <p>Today's Fear and Greed Index: {fear_and_greed_index}</p>
+        <img src="cid:image1" width="331" height="184">
+      </body>
+    </html>
+    """
 
-# MIMEText 객체 생성 후 HTML 본문 추가
-html_part = MIMEText(html_body, 'html')
-msg.attach(html_part)
+    # MIMEText 객체 생성 후 HTML 본문 추가
+    html_part = MIMEText(html_body, 'html')
+    msg.attach(html_part)
 
-# 이미지를 base64로 인코딩하여 본문에 첨부
-# with open(screenshot_path, 'rb') as img_file:
-#     img_data = img_file.read()
-#     img_base64 = base64.b64encode(img_data).decode('utf-8')
+    # 이미지를 base64로 인코딩하여 본문에 첨부
+    # with open(screenshot_path, 'rb') as img_file:
+    #     img_data = img_file.read()
+    #     img_base64 = base64.b64encode(img_data).decode('utf-8')
 
-# msg_image = MIMEImage(img_data)
-# msg_image.add_header('Content-ID', '<image1>')
-# msg.attach(msg_image)
+    # msg_image = MIMEImage(img_data)
+    # msg_image.add_header('Content-ID', '<image1>')
+    # msg.attach(msg_image)
 
-# 이메일 보내기
-smtp_gmail.send_message(msg)
+    # 이메일 보내기
+    smtp_gmail.send_message(msg)
 
-# 종료
-smtp_gmail.quit()
+except Exception as e:
+    print(e)
+    driver.quit()
+
+finally:
+    print("finally...")
+    # 종료
+    smtp_gmail.quit()
