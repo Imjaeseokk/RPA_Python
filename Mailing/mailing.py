@@ -56,7 +56,7 @@ driver.get(url)
 # value_element = driver.find_element(By.CLASS_NAME, 'market-fng-gauge__dial-number-value')
 # gpt가 이렇게 해보라고 함 1
 wait = WebDriverWait(driver, 10)
-value_element = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'market-fng-gauge__dial-number-value')))
+value_element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'market-fng-gauge__dial-number-value')))
 
 
 fear_and_greed_index = value_element.text
