@@ -65,12 +65,15 @@ print("loading complete")
 # WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.TAG_NAME, 'body')))  # 페이지 로드 완료 대기
 
 # 값이 40인 모든 요소를 찾고 클래스 이름 출력
-elements_with_value_40 = driver.find_elements(By.XPATH, "//*[text()='40']")
-for element in elements_with_value_40:
-    print(element.get_attribute('class'))  # 클래스 이름 출력
-### end
+all_elements = driver.find_elements(By.XPATH, '//*')
 
-print("no 40 element")
+# 각 요소의 class name과 HTML value를 출력
+for element in all_elements:
+    class_name = element.get_attribute('class')
+    html_value = element.get_attribute('innerHTML').strip()
+    if html_value == "40":
+        print(f"Class: {class_name}, Value: {html_value}")
+### end
 
 value_element = driver.find_element(By.CLASS_NAME, 'market-fng-gauge__dial-number-value')
 fear_and_greed_index = value_element.text
