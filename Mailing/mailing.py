@@ -56,6 +56,9 @@ driver.get(url)
 # value_element = driver.find_element(By.CLASS_NAME, 'market-fng-gauge__dial-number-value')
 # gpt가 이렇게 해보라고 함 1
 wait = WebDriverWait(driver, 10)
+while driver.execute_script("return document.readyState;") != "complete":
+    time.sleep(1)
+
 value_element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'market-fng-gauge__dial-number-value')))
 
 
