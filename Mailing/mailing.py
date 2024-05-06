@@ -68,11 +68,9 @@ print("loading complete")
 elements_with_value_40 = driver.find_elements(By.XPATH, "//*[text()='40']")
 for element in elements_with_value_40:
     print(element.get_attribute('class'))  # 클래스 이름 출력
-
-
-
-
 ### end
+
+print("no 40 element")
 
 value_element = driver.find_element(By.CLASS_NAME, 'market-fng-gauge__dial-number-value')
 fear_and_greed_index = value_element.text
