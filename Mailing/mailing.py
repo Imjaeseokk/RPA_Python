@@ -53,17 +53,28 @@ driver.get(url)
 # dial_element = driver.find_element(By.XPATH, '/html/body/div[1]/section[4]/section[1]/section[1]/div/section/div[1]/div[2]')
 
 
-# value_element = driver.find_element(By.CLASS_NAME, 'market-fng-gauge__dial-number-value')
-# gpt가 이렇게 해보라고 함 1
+# # gpt가 이렇게 해보라고 함 1
 wait = WebDriverWait(driver, 10)
 while driver.execute_script("return document.readyState;") != "complete":
     time.sleep(1)
-
 print("loading complete")
 
-value_element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'market-fng-gauge__dial-number-value')))
 
 
+### fgi value 찾는 code
+# WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.TAG_NAME, 'body')))  # 페이지 로드 완료 대기
+
+# 값이 40인 모든 요소를 찾고 클래스 이름 출력
+elements_with_value_40 = driver.find_elements(By.XPATH, "//*[text()='40']")
+for element in elements_with_value_40:
+    print(element.get_attribute('class'))  # 클래스 이름 출력
+
+
+
+
+### end
+
+value_element = driver.find_element(By.CLASS_NAME, 'market-fng-gauge__dial-number-value')
 fear_and_greed_index = value_element.text
 
 print(fear_and_greed_index)
