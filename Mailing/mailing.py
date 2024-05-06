@@ -51,7 +51,7 @@ time.sleep(15)  # 필요에 따라 대기 시간 조절 가능
 # wait = WebDriverWait(driver, 10)
 # dial_element = driver.find_element(By.CLASS_NAME, 'market-fng-gauge__meter')
 # dial_element = driver.find_element(By.XPATH, '/html/body/div[1]/section[4]/section[1]/section[1]/div/section/div[1]/div[2]')
-value_element = driver.find_element(By.XPATH, '/html/body/div[1]/section[4]/section[1]/section[1]/div/section/div[1]/div[2]/div[1]/div/div[1]/div[1]/div/div[4]/span')
+value_element = driver.find_element(By.CLASS_NAME, 'market-fng-gauge__dial-number-value')
 
 fear_and_greed_index = value_element.text
 
@@ -66,8 +66,8 @@ print(fear_and_greed_index)
 # image 추가용 code
 msg = MIMEMultipart()
 msg['From'] = 'kakaokokoa9971@gmail.com'
-# msg['To'] = 'jaeseokk@ajou.ac.kr'
-msg['To'] = 'june1012june@gmail.com,kakaokokoa9971@gmail.com,dw12.jeong@g.skku.edu'
+msg['To'] = 'jaeseokk@ajou.ac.kr'
+# msg['To'] = 'june1012june@gmail.com,kakaokokoa9971@gmail.com,dw12.jeong@g.skku.edu'
 
 
 msg['Subject'] = "Today's FGI is "+str(fear_and_greed_index)+"."
