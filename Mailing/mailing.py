@@ -62,7 +62,7 @@ print("loading complete")
 # 값이 40인 모든 요소를 찾고 클래스 이름 출력
 all_elements = driver.find_elements(By.XPATH, '//*')
 if all_elements:
-    print("있음")
+    print(all_elements)
 # 각 요소의 class name과 HTML value를 출력
 for element in all_elements:
     print(element)
