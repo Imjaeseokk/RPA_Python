@@ -59,15 +59,10 @@ while driver.execute_script("return document.readyState;") != "complete":
     time.sleep(1)
 print("loading complete")
 
-
-
-### fgi value 찾는 code
-# WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.TAG_NAME, 'body')))  # 페이지 로드 완료 대기
-
 # 값이 40인 모든 요소를 찾고 클래스 이름 출력
 all_elements = driver.find_elements(By.XPATH, '//*')
-print("find")
-
+if all_elements:
+    print("있음")
 # 각 요소의 class name과 HTML value를 출력
 for element in all_elements:
     print(element)
