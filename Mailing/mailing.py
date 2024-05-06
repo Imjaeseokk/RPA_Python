@@ -46,12 +46,18 @@ url = "https://edition.cnn.com/markets/fear-and-greed"
 driver.get(url)
 
 # 페이지가 완전히 로드될 때까지 잠시 대기
-time.sleep(15)  # 필요에 따라 대기 시간 조절 가능
+# time.sleep(15)  # 필요에 따라 대기 시간 조절 가능
 # Fear & Greed Index 다이얼 이미지 요소 찾기
 # wait = WebDriverWait(driver, 10)
 # dial_element = driver.find_element(By.CLASS_NAME, 'market-fng-gauge__meter')
 # dial_element = driver.find_element(By.XPATH, '/html/body/div[1]/section[4]/section[1]/section[1]/div/section/div[1]/div[2]')
-value_element = driver.find_element(By.CLASS_NAME, 'market-fng-gauge__dial-number-value')
+
+
+# value_element = driver.find_element(By.CLASS_NAME, 'market-fng-gauge__dial-number-value')
+# gpt가 이렇게 해보라고 함 1
+wait = WebDriverWait(driver, 10)
+value_element = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'market-fng-gauge__dial-number-value')))
+
 
 fear_and_greed_index = value_element.text
 
