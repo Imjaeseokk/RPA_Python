@@ -22,6 +22,12 @@ chrome_options = Options()
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--disable-extensions")
+chrome_options.add_argument("--disable-gpu")
+chrome_options.add_argument("--disable-infobars")
+chrome_options.add_argument("--disable-popup-blocking")
+chrome_options.add_argument("--disable-notifications")
+chrome_options.add_argument("--disable-blink-features=AutomationControlled")
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
 
@@ -38,7 +44,7 @@ smtp_gmail = smtplib.SMTP_SSL('smtp.gmail.com', 465)
 
 # 로그인
 app_password = os.environ.get('MYAPPPW')
-print("pw is",app_password)
+# print("pw is",app_password)
 smtp_gmail.login('kakaokokoa9971@gmail.com',app_password)
 
 ## fear and greed 가져오기
