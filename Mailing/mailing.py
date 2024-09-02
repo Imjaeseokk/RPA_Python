@@ -116,7 +116,8 @@ try:
 
 except Exception as e:
     print(f"An error occurred: {e}")
-    driver.save_screenshot("error_screenshot.png")
+    screenshot_path = os.path.join(os.getcwd(), "screenshot.png")
+    driver.save_screenshot(screenshot_path)
     print("Error screenshot taken")
 
 finally:
