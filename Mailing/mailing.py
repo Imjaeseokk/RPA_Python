@@ -45,7 +45,7 @@ smtp_gmail = smtplib.SMTP_SSL('smtp.gmail.com', 465)
 # 로그인
 app_password = os.environ.get('MYAPPPW')
 # print("pw is",app_password)
-smtp_gmail.login('kakaokokoa9971@gmail.com',app_password)
+smtp_gmail.login('kakaokokoa9971@gmail.com', app_password)
 
 ## fear and greed 가져오기
 url = "https://edition.cnn.com/markets/fear-and-greed"
@@ -54,35 +54,17 @@ driver.maximize_window()
 
 # 페이지가 완전히 로드될 때까지 잠시 대기
 time.sleep(15)  # 필요에 따라 대기 시간 조절 가능
-# Fear & Greed Index 다이얼 이미지 요소 찾기
-wait = WebDriverWait(driver, 30)
 
-screenshot_path = "screenshot.png"
-if driver.save_screenshot(screenshot_path):
-    print(f"Screenshot saved successfully to {screenshot_path}")
-else:
-    print("Failed to save screenshot")
-
-
-dial_element = wait.until(
-    EC.presence_of_element_located((By.CLASS_NAME, 'market-fng-gauge__meter'))
-)
-
-# dial_element = driver.find_element(By.CLASS_NAME, 'market-fng-gauge__meter')
-# dial_element = driver.find_element(By.XPATH, '/html/body/div[1]/section[4]/section[1]/section[1]/div/section/div[1]/div[2]')
-
-
-
-
+# value_element를 사용하여 Fear & Greed Index 값을 찾기
 try:
-    # value_element = driver.find_element(By.CLASS_NAME, 'market-fng-gauge__dial-number-value')
-    value_element = driver.find_element(By.CLASS_NAME, "market-fng-gauge__dial-number-value")
-
+    wait = WebDriverWait(driver, 30)
+    value_element = wait.until(
+        EC.presence_of_element_located((By.CLASS_NAME, "market-fng-gauge__dial-number-value"))
+    )
     fear_and_greed_index = value_element.text
-
     print(fear_and_greed_index)
 
-    # 다이얼 이미지 스크린샷 캡처
+    # 다이얼 이미지 스크린샷 캡처 코드 (현재는 주석 처리됨)
     # screenshot_path = "FeadAndGreed.png"
     # dial_element.screenshot(screenshot_path)
     # print("다이얼 이미지를 성공적으로 캡처하여", screenshot_path, "에 저장했습니다.")
@@ -94,8 +76,7 @@ try:
     msg['To'] = 'jaeseokk@ajou.ac.kr'
     # msg['To'] = 'june1012june@gmail.com,kakaokokoa9971@gmail.com,dw12.jeong@g.skku.edu'
 
-
-    msg['Subject'] = "Today's FGI is "+str(fear_and_greed_index)+"."
+    msg['Subject'] = "Today's FGI is " + str(fear_and_greed_index) + "."
 
     # text = MIMEText("Please refer to the attached image.:)")
     # msg.attach(text)
@@ -113,7 +94,6 @@ try:
     <html>
       <body>
         <p>Today's Fear and Greed Index: {fear_and_greed_index}</p>
-        <img src="cid:image1" width="331" height="184">
       </body>
     </html>
     """
@@ -134,11 +114,13 @@ try:
     # 이메일 보내기
     smtp_gmail.send_message(msg)
 
-# except Exception as e:
-#     print(e)
-#     driver.quit()
+except Exception as e:
+    print(f"An error occurred: {e}")
+    driver.save_screenshot("error_screenshot.png")
+    print("Error screenshot taken")
 
 finally:
     print("finally...")
     # 종료
     smtp_gmail.quit()
+    driver.quit()
