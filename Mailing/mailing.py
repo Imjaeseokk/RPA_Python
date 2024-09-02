@@ -56,7 +56,14 @@ driver.maximize_window()
 time.sleep(15)  # 필요에 따라 대기 시간 조절 가능
 # Fear & Greed Index 다이얼 이미지 요소 찾기
 wait = WebDriverWait(driver, 30)
-driver.save_screenshot("screenshot.png")
+
+screenshot_path = "screenshot.png"
+if driver.save_screenshot(screenshot_path):
+    print(f"Screenshot saved successfully to {screenshot_path}")
+else:
+    print("Failed to save screenshot")
+
+
 dial_element = wait.until(
     EC.presence_of_element_located((By.CLASS_NAME, 'market-fng-gauge__meter'))
 )
