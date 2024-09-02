@@ -95,12 +95,7 @@ jobs:
         with:
           chrome-version: '115.0.5790.102'  # 원하는 Chrome 버전으로 설정
           driver-cache: true  # ChromeDriver를 함께 설정
-
-      - name: Set up ChromeDriver
-        uses: actions/setup-chromedriver@v2
-        with:
-          version: '115.0.5790.102'  # Chrome과 일치하는 ChromeDriver 버전 설정
-
+          
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
