@@ -28,8 +28,8 @@ chrome_options.add_argument("--disable-infobars")
 chrome_options.add_argument("--disable-popup-blocking")
 chrome_options.add_argument("--disable-notifications")
 chrome_options.add_argument("--disable-blink-features=AutomationControlled")
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-
+# driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+driver = webdriver.Chrome(service=Service("/usr/bin/chromedriver"), options=chrome_options)
 
 # Simple Mail Transfer Protocol
 # 사용하는 email 계정의 smtp 서버 도메인 이름 입력
