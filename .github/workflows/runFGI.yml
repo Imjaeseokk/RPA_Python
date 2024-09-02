@@ -111,6 +111,12 @@ jobs:
         with:
           name: screenshot
           path: screenshot.png
+          
+      - name: Check working directory
+        run: pwd
+      
+      - name: List files in current directory
+        run: ls -l
 
       - name: Commit and push changes
         if: steps.changed-files.outputs.files_changed == 'true'
